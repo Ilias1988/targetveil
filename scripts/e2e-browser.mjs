@@ -100,13 +100,13 @@ class CdpClient {
     this.listeners.delete(message.method);
   }
 
-  send(method, params = {}, sessionId = this.sessionId) {
+  send(method, params = {}, sessionId = this.sessionId, timeout = 30000) {
     const id = ++this.sequence;
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         this.pending.delete(id);
         reject(new Error(`Timed out running Chrome command ${method}`));
-      }, 10000);
+      }, timeout);
       this.pending.set(id, {
         resolve: (value) => { clearTimeout(timer); resolve(value); },
         reject: (error) => { clearTimeout(timer); reject(error); },
@@ -117,7 +117,7 @@ class CdpClient {
     });
   }
 
-  event(method, timeout = 10000) {
+  event(method, timeout = 15000) {
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => reject(new Error(`Timed out waiting for ${method}`)), timeout);
       const callback = (params) => {
