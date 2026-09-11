@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="referrer" content="no-referrer">
+  <meta name="referrer" content="strict-origin">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src https://static.cloudflareinsights.com/beacon.min.js; style-src 'self'; img-src 'self' data:; connect-src https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Privacy &amp; threat model — TargetVeil</title>
   <link rel="stylesheet" href="./styles.css?v=5">
@@ -22,7 +22,7 @@
     <p>GitHub Pages delivers the application files and may process ordinary visit metadata such as IP address, user agent and URL. Cloudflare delivers the analytics beacon and receives ordinary website analytics metadata. The content you paste is not included in the URL and is not transmitted by TargetVeil's sanitizer code.</p>
 
     <h2>Website analytics</h2>
-    <p>The hosted HTML loads the Cloudflare Web Analytics module from <code>static.cloudflareinsights.com</code>, which reports aggregate page-view and performance measurements to <code>cloudflareinsights.com</code>. TargetVeil defines no custom analytics events and does not pass prompt fields, imported evidence, scope-file contents, detector findings or sanitized output to the beacon. Browser privacy tools may block it without affecting sanitization.</p>
+    <p>The hosted HTML loads the Cloudflare Web Analytics module from <code>static.cloudflareinsights.com</code>, which reports aggregate page-view and performance measurements to <code>cloudflareinsights.com</code>. Cross-origin requests use a strict-origin referrer policy, so the referrer contains the site origin rather than its path or query string. TargetVeil defines no custom analytics events and does not pass prompt fields, imported evidence, scope-file contents, detector findings or sanitized output to the beacon. Browser privacy tools may block it without affecting sanitization.</p>
     <p>A remote analytics script is an additional third-party trust dependency. For engagements that do not permit it, use the disconnected local or CLI workflow described below.</p>
 
     <h2>What it covers</h2>

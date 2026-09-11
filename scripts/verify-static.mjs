@@ -22,7 +22,8 @@ for (const [name, page] of [["index.html", html], ["privacy.html", privacy]]) {
   assert.equal((page.match(new RegExp(`src=["']${escapedAnalyticsScript}["']`, "g")) ?? []).length, 1, `${name} must load the analytics beacon exactly once`);
 }
 assert.equal((`${html}\n${privacy}`.match(/data-cf-beacon=/g) ?? []).length, 2, "only the two declared analytics integrations are allowed");
-assert.match(html, /name="referrer" content="no-referrer"/, "referrer policy is missing");
+assert.match(html, /name="referrer" content="strict-origin"/, "privacy-preserving analytics-compatible referrer policy is missing");
+assert.match(privacy, /name="referrer" content="strict-origin"/, "privacy page referrer policy is missing");
 assert.match(html, /rel="canonical" href="https:\/\/ilias1988\.github\.io\/targetveil\/"/, "canonical URL is missing");
 assert.match(html, /id="about-targetveil"/, "visible SEO description is missing");
 assert.match(html, /itemtype="https:\/\/schema\.org\/FAQPage"/, "semantic FAQ markup is missing");
