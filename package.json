@@ -1,0 +1,10 @@
+{
+  "name": "targetveil-browser",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/browser-engine.test.mjs",
+    "test:e2e": "node scripts/e2e-browser.mjs",
+    "test:all": "npm test && node scripts/verify-static.mjs && npm run test:e2e"
+  }
+}

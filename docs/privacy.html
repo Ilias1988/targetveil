@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Privacy &amp; threat model — TargetVeil</title>
+  <link rel="stylesheet" href="./styles.css?v=5">
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="./"><span class="brand-mark">TV</span><span>TargetVeil</span></a></header>
+  <main class="policy-page">
+    <p class="eyebrow">PRIVACY &amp; THREAT MODEL</p>
+    <h1>Your prompts are not transmitted by the application.</h1>
+    <p>TargetVeil is a static, client-side application for global use, with universal and country-specific identifier packs. Its code runs in the browser and has no backend endpoint, analytics, advertising, telemetry or account system.</p>
+
+    <h2>What is stored</h2>
+    <p>The original prompt or imported evidence file, sanitized result and temporary mapping exist only in the current page's memory. They are not written to cookies, <code>localStorage</code>, <code>sessionStorage</code> or IndexedDB. The service worker stores only public static assets so the application can work offline. Sanitized downloads are generated locally as temporary in-memory files.</p>
+
+    <h2>What the host can see</h2>
+    <p>GitHub Pages delivers the application files and may process ordinary visit metadata such as IP address, user agent and URL. The content you paste is not included in the URL and is not transmitted by TargetVeil's code.</p>
+
+    <h2>What it covers</h2>
+    <ul>
+      <li>Reduces the risk of accidentally sending identifiable target data to a public AI service.</li>
+      <li>Preserves consistent pseudonymized relationships within a prompt.</li>
+      <li>Provides a manual review of every detection before copying.</li>
+    </ul>
+
+    <h2>What it does not cover</h2>
+    <ul>
+      <li>It does not guarantee 100% detection or replace the client's data-handling rules.</li>
+      <li>It does not protect a compromised browser or device, malicious extensions, clipboard managers or screenshots.</li>
+      <li>It does not automatically turn pseudonymized data into legally anonymous data.</li>
+      <li>It is not permission to transmit data when an engagement prohibits third-party AI.</li>
+    </ul>
+
+    <h2>Higher-assurance use</h2>
+    <p>For highly sensitive engagements, clone the repository, disconnect from the network and open the application locally or use the CLI.</p>
+  </main>
+</body>
+</html>

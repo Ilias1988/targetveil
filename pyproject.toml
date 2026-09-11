@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "targetveil"
+version = "0.2.0"
+description = "Local-first redaction and pseudonymization for AI-assisted pentesting"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Ilias Georgopoulos" }]
+keywords = ["pentesting", "privacy", "pii", "redaction", "llm", "security"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Security",
+]
+
+[project.scripts]
+targetveil = "targetveil.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Ilias1988/targetveil"
+Issues = "https://github.com/Ilias1988/targetveil/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

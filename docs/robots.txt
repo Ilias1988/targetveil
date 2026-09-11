@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ilias1988.github.io/targetveil/sitemap.xml
+

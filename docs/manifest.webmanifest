@@ -1,0 +1,10 @@
+{
+  "name": "TargetVeil",
+  "short_name": "TargetVeil",
+  "description": "Local-first pentest prompt sanitizer",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#07100e",
+  "theme_color": "#08110f"
+}
+

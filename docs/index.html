@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sanitize secrets, PII and target infrastructure from pentest prompts and security-tool exports before using public AI. 17 workflow profiles, local file processing and no uploads.">
+  <meta name="keywords" content="pentest prompt sanitizer, PII redaction, AI pentesting privacy, LLM data loss prevention, Burp Suite redaction, Nmap anonymizer, BloodHound, NetExec, Mimikatz, Wireshark, Nessus, cloud security">
+  <meta name="author" content="Ilias Georgopoulos">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; worker-src 'self'; manifest-src 'self'">
+  <meta name="theme-color" content="#08110f">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307100e'/%3E%3Cpath d='M32 8 52 16v14c0 13-8 22-20 27C20 52 12 43 12 30V16l20-8Z' fill='none' stroke='%2363f5b5' stroke-width='4'/%3E%3Cpath d='m23 31 6 6 13-14' fill='none' stroke='%2363f5b5' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="canonical" href="https://ilias1988.github.io/targetveil/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TargetVeil">
+  <meta property="og:title" content="TargetVeil — Local Pentest Prompt Sanitizer">
+  <meta property="og:description" content="Sanitize pentest prompts and local security-tool exports with 17 workflow profiles before using public AI. No uploads. No backend.">
+  <meta property="og:url" content="https://ilias1988.github.io/targetveil/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TargetVeil — Local Pentest Prompt Sanitizer">
+  <meta name="twitter:description" content="Browser-only privacy protection for AI-assisted penetration testing.">
+  <title>TargetVeil — Local Pentest Prompt Sanitizer</title>
+  <link rel="stylesheet" href="./styles.css?v=5">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <script type="module" src="./app.js?v=3"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="TargetVeil home">
+      <span class="brand-mark" aria-hidden="true">TV</span>
+      <span>TargetVeil</span>
+    </a>
+    <div class="privacy-pill"><span class="pulse"></span> Browser-only · No uploads</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-title">
+        <p class="eyebrow">LOCAL-FIRST PENTEST PRIVACY</p>
+        <h1>Remove target data before it reaches public AI.</h1>
+      </div>
+      <div class="hero-copy-block">
+        <p class="hero-copy">TargetVeil detects personal data, client infrastructure and secrets inside pentest prompts and text exports. Paste evidence or load a local file; everything runs in your browser with no backend, analytics or prompt storage.</p>
+        <div class="trust-row" aria-label="Privacy properties">
+          <span>✓ No server API</span><span>✓ No telemetry</span><span>✓ Open source</span><span>✓ Offline-ready</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="section-heading">
+        <div><p class="step">01 / INPUT</p><h2 id="workspace-title">Pentest prompt</h2></div>
+        <div class="demo-controls">
+          <label for="demo-profile">Synthetic example
+            <select id="demo-profile" aria-label="Choose a synthetic tool example"></select>
+          </label>
+          <button id="demo-button" class="button ghost" type="button">Load selected example</button>
+        </div>
+      </div>
+
+      <div class="config-grid">
+        <label>Profile
+          <select id="profile" aria-describedby="profile-help"></select>
+          <small id="profile-help"></small>
+        </label>
+        <label>Identifier region
+          <select id="region"></select>
+          <small>Global enables every available country pack.</small>
+        </label>
+        <label>Method
+          <select id="mode">
+            <option value="pseudonymize">Pseudonymize — preserve relationships</option>
+            <option value="redact">Redact — generic placeholders</option>
+          </select>
+          <small>The mapping exists only in this page's memory.</small>
+        </label>
+      </div>
+
+      <div class="evidence-loader">
+        <label class="file-card">Load local evidence file
+          <input id="evidence-file" type="file" accept=".txt,.log,.json,.xml,.csv,.har,.nessus,.nmap,.md,.yaml,.yml,text/plain,application/json">
+          <small id="evidence-status">Text exports up to 10 MB · processed only in this tab.</small>
+        </label>
+      </div>
+
+      <label class="textarea-label" for="source-input">Original text</label>
+      <textarea id="source-input" spellcheck="false" autocomplete="off" placeholder="Paste or load output from Burp, Nmap, Nuclei, ffuf, BloodHound, NetExec, Wireshark, Nessus, cloud tools or SIEM logs…"></textarea>
+
+      <details class="advanced">
+        <summary>Engagement scope and advanced controls</summary>
+        <div class="advanced-grid">
+          <label class="file-card">Custom scope file (.json)
+            <input id="scope-file" type="file" accept="application/json,.json">
+            <small id="scope-status">No scope file loaded.</small>
+          </label>
+          <label>Manual sensitive values — one per line
+            <textarea id="custom-values" class="small-area" spellcheck="false" placeholder="CLIENT=Acme Ltd&#10;DOMAIN=internal.acme.gr"></textarea>
+          </label>
+          <label>Allowlist — one per line
+            <textarea id="allowlist" class="small-area" spellcheck="false" placeholder="example.com&#10;127.0.0.1"></textarea>
+          </label>
+        </div>
+      </details>
+
+      <div class="actions">
+        <button id="sanitize-button" class="button primary" type="button">Analyze &amp; sanitize locally</button>
+        <button id="clear-button" class="button ghost" type="button">Clear page memory</button>
+      </div>
+    </section>
+
+    <section id="result-panel" class="results" aria-labelledby="result-title" hidden>
+      <div class="section-heading">
+        <div><p class="step">02 / REVIEW</p><h2 id="result-title">Preview before copying</h2></div>
+        <span id="status-badge" class="status"></span>
+      </div>
+      <p id="summary" class="summary"></p>
+      <label class="textarea-label" for="safe-output">Sanitized prompt</label>
+      <textarea id="safe-output" class="output-area" readonly spellcheck="false"></textarea>
+      <div class="result-actions">
+        <button id="copy-button" class="button primary" type="button" disabled>Copy sanitized prompt</button>
+        <button id="download-button" class="button ghost" type="button" disabled>Download sanitized file</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Explainable detection — original values are displayed only inside this local page.</caption>
+          <thead><tr><th>Type</th><th>Detected value</th><th>Replacement</th><th>Detector / confidence</th><th>Why it was hidden</th></tr></thead>
+          <tbody id="findings-body"></tbody>
+        </table>
+      </div>
+      <p class="manual-warning">Automated detection cannot guarantee that every sensitive value is found. Review the sanitized prompt before sending it to a third-party service.</p>
+    </section>
+
+    <section class="how-it-works">
+      <p class="step">PRIVACY MODEL</p>
+      <h2>An online tool without online processing.</h2>
+      <div class="model-grid">
+        <article><span>1</span><h3>Load</h3><p>Paste text, choose a synthetic demo or read a supported evidence file locally.</p></article>
+        <article><span>2</span><h3>Process</h3><p>Detectors run locally with JavaScript inside your browser.</p></article>
+        <article><span>3</span><h3>Review</h3><p>Inspect every detection and its explanation before copying.</p></article>
+        <article><span>4</span><h3>Forget</h3><p>Reloading or clearing the page removes the prompt and mapping.</p></article>
+      </div>
+    </section>
+
+    <section class="seo-content" aria-labelledby="about-targetveil">
+      <p class="step">ABOUT TARGETVEIL</p>
+      <h2 id="about-targetveil">A privacy layer built for AI-assisted penetration testing</h2>
+      <div class="prose-grid">
+        <div>
+          <p>TargetVeil is an open-source pentest prompt sanitizer. It helps authorized security professionals remove personally identifiable information, client infrastructure and authentication secrets before pasting technical evidence into a public large language model.</p>
+          <p>Unlike a generic PII scrubber, TargetVeil understands security assessment data. It recognizes HTTP authorization headers, cookies, API keys, JWTs, database credentials, password hashes, cloud resource identifiers, IP addresses, domains, Active Directory objects and engagement-specific scope values while preserving the technical structure an AI needs for useful analysis.</p>
+        </div>
+        <div>
+          <p>Deterministic pseudonyms preserve relationships between repeated hosts, accounts and network ranges. A target domain hierarchy remains a hierarchy, and repeated values receive the same safe identity during the current session. Seventeen focused profiles cover web testing, network traffic, Active Directory, exploitation, vulnerability scanners, cloud and Kubernetes evidence, OSINT and security logs.</p>
+          <p>The browser application has no data-processing backend. Its Content Security Policy blocks network connections, it loads no third-party scripts, and it does not write prompts to browser storage. Country-specific identifier packs supplement global detectors without making one country the product's focus.</p>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+        <article><h3>Pentest-first profiles</h3><p>Focused rules for web, network, AD, exploitation, vulnerability scanning, cloud, OSINT and SIEM workflows reduce irrelevant detections.</p></article>
+        <article><h3>Global core + regional packs</h3><p>Global security-data detection plus identifier packs for the EU, Greece, US, UK, Canada, Australia, India and Brazil.</p></article>
+        <article><h3>Custom engagement scope</h3><p>Load a local JSON file containing client names, project codes, domains and explicit allowlist values.</p></article>
+        <article><h3>Explainable review</h3><p>See the matched value, replacement, detector category and privacy reason before copying anything.</p></article>
+        <article><h3>Local evidence workflow</h3><p>Read supported text exports up to 10 MB and download the sanitized result without uploading either file.</p></article>
+        <article><h3>Safe demo library</h3><p>Try one declared-canary synthetic example for every profile without exposing real engagement data.</p></article>
+      </div>
+    </section>
+
+    <section class="faq" itemscope itemtype="https://schema.org/FAQPage" aria-labelledby="faq-title">
+      <p class="step">FREQUENTLY ASKED QUESTIONS</p>
+      <h2 id="faq-title">Pentest prompt sanitization FAQ</h2>
+      <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Does TargetVeil upload my pentest data?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">No. Detection and replacement run in your browser. The application has no prompt-processing API, analytics or telemetry.</p></div>
+      </details>
+      <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Can it guarantee that a prompt contains no sensitive data?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">No automated detector can guarantee complete coverage. TargetVeil adds scope-specific values, a verification pass and a mandatory preview, but the pentester must still review the result and follow the engagement's data-handling rules.</p></div>
+      </details>
+      <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Which penetration testing tools are supported?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">TargetVeil includes profiles for Burp and raw HTTP, Nmap, Nuclei, ffuf, sqlmap, Gobuster, Nikto, WPScan, BloodHound, NetExec, Impacket, Mimikatz, Metasploit, Wireshark, tcpdump, Nessus, OpenVAS, AWS, Azure, GCP, Kubernetes, OSINT and SIEM logs.</p></div>
+      </details>
+      <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Can I run TargetVeil completely offline?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Yes. After the static application is cached, it can run offline. For high-sensitivity engagements, clone the repository and serve the same files locally while disconnected from the network.</p></div>
+      </details>
+      <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Which local evidence files can it read?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">The browser reads text, log, JSON, XML, CSV, HAR, Nessus, Nmap, Markdown and YAML exports up to 10 MB. Binary files, PDFs, Office documents and images are not processed in version 0.2.</p></div>
+      </details>
+    </section>
+
+    <section class="creator" itemscope itemtype="https://schema.org/Person" aria-labelledby="creator-title">
+      <div>
+        <p class="step">CREATOR</p>
+        <h2 id="creator-title">Built by <span itemprop="name">Ilias Georgopoulos</span></h2>
+        <p>Cybersecurity practitioner focused on offensive security, web application pentesting, practical research and AI-assisted security automation.</p>
+      </div>
+      <nav class="creator-links" aria-label="Creator profiles">
+        <a itemprop="sameAs" href="https://github.com/Ilias1988" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <a itemprop="sameAs" href="https://www.linkedin.com/in/ilias-georgopoulos-b491a3371/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a itemprop="sameAs" href="https://x.com/EliotGeo" target="_blank" rel="noopener noreferrer">X / Twitter <span aria-hidden="true">↗</span></a>
+        <a itemprop="url" href="https://ilias1988.me/" target="_blank" rel="noopener noreferrer">Portfolio <span aria-hidden="true">↗</span></a>
+      </nav>
+    </section>
+  </main>
+
+  <footer>
+    <p>TargetVeil v0.2 · Created by <a href="https://github.com/Ilias1988" target="_blank" rel="noopener noreferrer">Ilias Georgopoulos</a>.</p>
+    <nav class="footer-links" aria-label="Project links"><a href="./privacy.html">Privacy &amp; threat model</a><a href="https://ilias1988.me/" target="_blank" rel="noopener noreferrer">Portfolio</a></nav>
+  </footer>
+</body>
+</html>

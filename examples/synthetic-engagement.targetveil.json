@@ -1,0 +1,14 @@
+{
+  "engagement": "Synthetic ACME Web Assessment",
+  "profile": "burp",
+  "region": "global",
+  "sensitive_values": [
+    { "type": "CLIENT", "value": "Acme Pentest Ltd" },
+    { "type": "CLIENT_CODE", "value": "SYNTH-ENG-2026-001" },
+    { "type": "DOMAIN", "value": "acme-pentest.gr" }
+  ],
+  "allowlist": [
+    "example.com",
+    "127.0.0.1"
+  ]
+}
