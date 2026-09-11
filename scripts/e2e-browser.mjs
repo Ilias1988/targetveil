@@ -258,7 +258,15 @@ try {
   })`);
   assert.equal(responsive.noHorizontalOverflow, true);
   assert.match(responsive.title, /TargetVeil/);
-  assert.deepEqual(responsive.outboundResources, []);
+  const permittedOutboundOrigins = new Set([
+    "https://static.cloudflareinsights.com",
+    "https://cloudflareinsights.com",
+  ]);
+  assert.equal(
+    responsive.outboundResources.every((origin) => permittedOutboundOrigins.has(origin)),
+    true,
+    `unexpected outbound resource: ${responsive.outboundResources.join(", ")}`,
+  );
   const accessibility = await client.evaluate(`({
     unnamedButtons: [...document.querySelectorAll("button")].filter((item) => !item.textContent.trim() && !item.getAttribute("aria-label")).length,
     unlabelledInputs: [...document.querySelectorAll("input, select, textarea")].filter((item) => !item.labels?.length && !item.getAttribute("aria-label")).length,

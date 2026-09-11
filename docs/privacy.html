@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src https://static.cloudflareinsights.com/beacon.min.js; style-src 'self'; img-src 'self' data:; connect-src https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Privacy &amp; threat model — TargetVeil</title>
   <link rel="stylesheet" href="./styles.css?v=5">
 </head>
@@ -13,13 +13,17 @@
   <main class="policy-page">
     <p class="eyebrow">PRIVACY &amp; THREAT MODEL</p>
     <h1>Your prompts are not transmitted by the application.</h1>
-    <p>TargetVeil is a static, client-side application for global use, with universal and country-specific identifier packs. Its code runs in the browser and has no backend endpoint, analytics, advertising, telemetry or account system.</p>
+    <p>TargetVeil is a static, client-side application for global use, with universal and country-specific identifier packs. Sanitization runs in the browser and the application has no prompt-processing backend, advertising or account system. The hosted site uses Cloudflare Web Analytics as described below.</p>
 
     <h2>What is stored</h2>
     <p>The original prompt or imported evidence file, sanitized result and temporary mapping exist only in the current page's memory. They are not written to cookies, <code>localStorage</code>, <code>sessionStorage</code> or IndexedDB. The service worker stores only public static assets so the application can work offline. Sanitized downloads are generated locally as temporary in-memory files.</p>
 
     <h2>What the host can see</h2>
-    <p>GitHub Pages delivers the application files and may process ordinary visit metadata such as IP address, user agent and URL. The content you paste is not included in the URL and is not transmitted by TargetVeil's code.</p>
+    <p>GitHub Pages delivers the application files and may process ordinary visit metadata such as IP address, user agent and URL. Cloudflare delivers the analytics beacon and receives ordinary website analytics metadata. The content you paste is not included in the URL and is not transmitted by TargetVeil's sanitizer code.</p>
+
+    <h2>Website analytics</h2>
+    <p>The hosted HTML loads the Cloudflare Web Analytics module from <code>static.cloudflareinsights.com</code>, which reports aggregate page-view and performance measurements to <code>cloudflareinsights.com</code>. TargetVeil defines no custom analytics events and does not pass prompt fields, imported evidence, scope-file contents, detector findings or sanitized output to the beacon. Browser privacy tools may block it without affecting sanitization.</p>
+    <p>A remote analytics script is an additional third-party trust dependency. For engagements that do not permit it, use the disconnected local or CLI workflow described below.</p>
 
     <h2>What it covers</h2>
     <ul>
@@ -39,5 +43,8 @@
     <h2>Higher-assurance use</h2>
     <p>For highly sensitive engagements, clone the repository, disconnect from the network and open the application locally or use the CLI.</p>
   </main>
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"6a2fab6683174e5e9deb23e332f374f0"}'></script>
+  <!-- End Cloudflare Web Analytics -->
 </body>
 </html>

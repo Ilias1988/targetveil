@@ -1,4 +1,4 @@
-const CACHE = "targetveil-static-v6";
+const CACHE = "targetveil-static-v7";
 const ASSETS = ["./", "./index.html", "./styles.css?v=5", "./engine.js?v=3", "./demos.js?v=1", "./app.js?v=3", "./privacy.html", "./manifest.webmanifest", "./robots.txt", "./sitemap.xml"];
 
 self.addEventListener("install", (event) => {

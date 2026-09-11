@@ -8,7 +8,7 @@
   <meta name="author" content="Ilias Georgopoulos">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; worker-src 'self'; manifest-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com/beacon.min.js; style-src 'self'; img-src 'self' data:; connect-src https://cloudflareinsights.com; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; worker-src 'self'; manifest-src 'self'">
   <meta name="theme-color" content="#08110f">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307100e'/%3E%3Cpath d='M32 8 52 16v14c0 13-8 22-20 27C20 52 12 43 12 30V16l20-8Z' fill='none' stroke='%2363f5b5' stroke-width='4'/%3E%3Cpath d='m23 31 6 6 13-14' fill='none' stroke='%2363f5b5' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="canonical" href="https://ilias1988.github.io/targetveil/">
@@ -41,9 +41,9 @@
         <h1>Remove target data before it reaches public AI.</h1>
       </div>
       <div class="hero-copy-block">
-        <p class="hero-copy">TargetVeil detects personal data, client infrastructure and secrets inside pentest prompts and text exports. Paste evidence or load a local file; everything runs in your browser with no backend, analytics or prompt storage.</p>
+        <p class="hero-copy">TargetVeil detects personal data, client infrastructure and secrets inside pentest prompts and text exports. Paste evidence or load a local file; sanitization runs in your browser with no prompt-processing backend, uploads or prompt storage.</p>
         <div class="trust-row" aria-label="Privacy properties">
-          <span>✓ No server API</span><span>✓ No telemetry</span><span>✓ Open source</span><span>✓ Offline-ready</span>
+          <span>✓ No prompt API</span><span>✓ No prompt uploads</span><span>✓ Open source</span><span>✓ Offline-ready</span>
         </div>
       </div>
     </section>
@@ -153,7 +153,7 @@
         </div>
         <div>
           <p>Deterministic pseudonyms preserve relationships between repeated hosts, accounts and network ranges. A target domain hierarchy remains a hierarchy, and repeated values receive the same safe identity during the current session. Seventeen focused profiles cover web testing, network traffic, Active Directory, exploitation, vulnerability scanners, cloud and Kubernetes evidence, OSINT and security logs.</p>
-          <p>The browser application has no data-processing backend. Its Content Security Policy blocks network connections, it loads no third-party scripts, and it does not write prompts to browser storage. Country-specific identifier packs supplement global detectors without making one country the product's focus.</p>
+          <p>The browser application has no prompt-processing backend and does not write prompts to browser storage. A narrowly scoped Cloudflare Web Analytics beacon measures aggregate site usage; TargetVeil does not pass prompt, evidence, scope or sanitized-output values to it. Country-specific identifier packs supplement global detectors without making one country the product's focus.</p>
         </div>
       </div>
 
@@ -172,7 +172,11 @@
       <h2 id="faq-title">Pentest prompt sanitization FAQ</h2>
       <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
         <summary itemprop="name">Does TargetVeil upload my pentest data?</summary>
-        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">No. Detection and replacement run in your browser. The application has no prompt-processing API, analytics or telemetry.</p></div>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">No. Detection and replacement run in your browser. The application has no prompt-processing API, and prompt, evidence, scope and sanitized-output values are not submitted to the website analytics service.</p></div>
+      </details>
+      <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Does TargetVeil use website analytics?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Yes. The hosted site uses Cloudflare Web Analytics for aggregate page-view and performance measurements. The sanitizer does not send form fields, imported evidence, engagement scope or output values to analytics. The local and offline workflow remains available for higher-assurance use.</p></div>
       </details>
       <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
         <summary itemprop="name">Can it guarantee that a prompt contains no sensitive data?</summary>
@@ -208,8 +212,11 @@
   </main>
 
   <footer>
-    <p>TargetVeil v0.2 · Created by <a href="https://github.com/Ilias1988" target="_blank" rel="noopener noreferrer">Ilias Georgopoulos</a>.</p>
+    <p>TargetVeil v0.2.1 · Created by <a href="https://github.com/Ilias1988" target="_blank" rel="noopener noreferrer">Ilias Georgopoulos</a>.</p>
     <nav class="footer-links" aria-label="Project links"><a href="./privacy.html">Privacy &amp; threat model</a><a href="https://ilias1988.me/" target="_blank" rel="noopener noreferrer">Portfolio</a></nav>
   </footer>
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"6a2fab6683174e5e9deb23e332f374f0"}'></script>
+  <!-- End Cloudflare Web Analytics -->
 </body>
 </html>

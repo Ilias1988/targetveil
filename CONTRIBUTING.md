@@ -10,7 +10,7 @@ Thank you for helping improve privacy for AI-assisted security work.
 - New detectors must document why the data is sensitive and how false positives are limited.
 - Prefer label context, format validation or checksums over broad numeric regular expressions.
 - Every detector change must add positive, negative and leakage regression tests.
-- Do not add telemetry, analytics, remote models, third-party scripts, CDNs or prompt persistence.
+- Do not add remote models, prompt persistence, custom analytics events or additional third-party scripts/CDNs. The only approved hosted-site analytics dependency is the declared Cloudflare Web Analytics beacon; sanitizer and prompt data must never be passed to it.
 
 ## Development
 

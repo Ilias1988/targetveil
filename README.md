@@ -2,7 +2,7 @@
 
 **Local-first redaction and pseudonymization for AI-assisted penetration testing.**
 
-TargetVeil helps authorized security professionals remove personal data, client infrastructure, credentials and engagement identifiers before sharing technical evidence with a public AI service. The web application performs all detection and replacement inside the browser. It has no prompt-processing backend, telemetry or third-party scripts.
+TargetVeil helps authorized security professionals remove personal data, client infrastructure, credentials and engagement identifiers before sharing technical evidence with a public AI service. The web application performs all detection and replacement inside the browser and has no prompt-processing backend. The hosted pages use Cloudflare Web Analytics; prompts and evidence are not submitted to it by the sanitizer.
 
 Live application: **https://ilias1988.github.io/targetveil/**
 
@@ -58,16 +58,16 @@ For higher-assurance use, clone the repository, disconnect the network, start th
 
 ### Browser privacy properties
 
-- `connect-src 'none'` blocks application network connections.
+- CSP permits connections only to Cloudflare Web Analytics; the sanitizer engine and UI have no network API.
 - No `fetch`, `XMLHttpRequest`, WebSocket or beacon call exists in the application engine/UI.
-- No analytics, remote fonts, CDNs or third-party JavaScript.
+- No remote fonts or application dependencies. The only third-party script on hosted HTML pages is the disclosed Cloudflare Web Analytics beacon.
 - No prompt values are written to cookies, `localStorage`, `sessionStorage` or IndexedDB.
 - The service worker caches only static public application assets.
 - Reloading or using **Clear page memory** discards the active prompt and mapping.
 
 Evidence-file import uses the browser's local file API. The original file is read into the current tab only; TargetVeil does not upload it. Sanitized downloads are created locally with an in-memory Blob.
 
-The host can still receive ordinary website-request metadata such as visitor IP address, user agent and the requested URL. Prompt text is not placed in the URL or transmitted by TargetVeil. See the [threat model](docs/THREAT_MODEL.md).
+GitHub Pages and Cloudflare Web Analytics can receive ordinary website-request and performance metadata. TargetVeil defines no custom analytics events and its sanitizer does not pass prompt fields, evidence, scope data, findings or output to the beacon. Cloudflare's remote script is nevertheless a third-party trust dependency. For higher-assurance work, use the disconnected local or CLI workflow. See the [privacy page](docs/privacy.html) and [threat model](docs/THREAT_MODEL.md).
 
 ## CLI
 
