@@ -7,9 +7,9 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const docs = resolve(root, "docs");
 const read = (name) => readFile(resolve(docs, name), "utf8");
 
-const [html, privacy, app, engine, demos, worker, manifest, robots, sitemap] = await Promise.all([
+const [html, privacy, app, engine, demos, worker, manifest, robots, sitemap, googleVerification] = await Promise.all([
   read("index.html"), read("privacy.html"), read("app.js"), read("engine.js"), read("demos.js"), read("service-worker.js"),
-  read("manifest.webmanifest"), read("robots.txt"), read("sitemap.xml"),
+  read("manifest.webmanifest"), read("robots.txt"), read("sitemap.xml"), read("google56c60131cae5531b.html"),
 ]);
 
 const analyticsToken = "6a2fab6683174e5e9deb23e332f374f0";
@@ -54,5 +54,6 @@ for (const path of localReferences) await stat(resolve(docs, path));
 JSON.parse(manifest);
 assert.match(robots, /Sitemap: https:\/\/ilias1988\.github\.io\/targetveil\/sitemap\.xml/);
 assert.match(sitemap, /https:\/\/ilias1988\.github\.io\/targetveil\//);
+assert.equal(googleVerification.trim(), "google-site-verification: google56c60131cae5531b.html", "Google Search Console verification file is invalid");
 
 console.log(`Static privacy verification passed (${new Set(localReferences).size} local assets checked; analytics allowlist verified).`);

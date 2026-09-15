@@ -5,8 +5,9 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { createServer } from "node:net";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = new URL("../", import.meta.url).pathname.replace(/^\/(.:\/)/, "$1");
+const root = fileURLToPath(new URL("../", import.meta.url));
 const pause = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 async function freePort() {
